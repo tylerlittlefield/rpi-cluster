@@ -1,0 +1,11 @@
+#cloud-config
+
+chpasswd:
+  expire: true
+  list:
+  - ubuntu:ubuntu
+
+ssh_pwauth: true
+
+power_state:
+  mode: reboot
