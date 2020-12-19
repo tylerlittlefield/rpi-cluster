@@ -5,7 +5,7 @@ rpi-cluster
 -   [🧰 Hardware](#hardware)
 -   [🔬 Setting up the microSD card](#setting-up-the-microsd-card)
 -   [🥾 Setting up USB boot](#setting-up-usb-boot)
--   [👨‍🍳 Changing the hostname](#changing-the-hostname)
+-   [👩‍🍳 Changing the hostname](#changing-the-hostname)
 -   [👤 Change user](#change-user)
 -   [🔑 Set up `.pub` key
     authentication](#set-up-.pub-key-authentication)
@@ -148,7 +148,7 @@ Now, with the Pi shutdown and disconnected from power, insert the USB
 and remove the microSD. Turn on the Pi and it should boot from USB now.
 Repeat this process for all Pi’s.
 
-## 👨‍🍳 Changing the hostname
+## 👩‍🍳 Changing the hostname
 
 For all my Pi’s, I want clear hostnames to organize my cluster. I went
 with the following naming:
@@ -246,11 +246,46 @@ I basically followed this:
 I clone the k3s-ansible project to this repo and removed some stuff I
 didn’t need, things like the README, and then:
 
-1.  Edited `inventory/hosts.ini`
+1.  Edit `inventory/hosts.ini`, add node IPs.
+2.  Edit `inventory/group_vars/all.yml` and change the `ansible_user` to
+    pirate.
+3.  Run
+    `ansible-playbook site.yml -i inventory/hosts.ini --ask-become-pass`
+
+Now grab the kube config file with:
+
+``` bash
+scp pirate@main:~/.kube/config ~/.kube/config-rpi
+```
+
+If `kubectl` isn’t installed, `brew install kubectl`. Set the
+`KUBECONFIG` environment variable with:
+
+``` bash
+export KUBECONFIG=~/.kube/config-rpi
+```
+
+If you want this to be permanent, put it in your `~/.zshrc` file. After
+all of this, you should be able to fetch all nodes with
+`kubectl get nodes`.
+
+<img src="images/kubectl-get-nodes.png" width="1340" />
+
+Note, that I think the `--ask-become-pass` part is not supposed to be
+necessary. I may have configured things wrong, but adding it allows this
+playbook to complete.
 
 ## 📈 Setting up monitoring tools
 
-tbc
+I basically followed this:
+
+-   <https://www.jeffgeerling.com/blog/2020/raspberry-pi-cluster-episode-4-minecraft-pi-hole-grafana-and-more>
+
+And used
+[`carlosedp/cluster-monitoring`](https://github.com/carlosedp/cluster-monitoring)
+to easily set up monitoring for the Pis. I cloned this repository to my
+main node and followed the [k3s
+instructions](https://github.com/carlosedp/cluster-monitoring#quickstart-for-k3s).
 
 ## 👨‍🏫 Things I learned
 
