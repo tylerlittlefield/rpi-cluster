@@ -269,7 +269,7 @@ If you want this to be permanent, put it in your `~/.zshrc` file. After
 all of this, you should be able to fetch all nodes with
 `kubectl get nodes`.
 
-<img src="images/kubectl-get-nodes.png" width="1340" />
+![](https://raw.githubusercontent.com/tyluRp/rpi-cluster/master/images/kubectl-get-nodes.png)
 
 Note, that I think the `--ask-become-pass` part is not supposed to be
 necessary. I may have configured things wrong, but adding it allows this
