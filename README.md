@@ -5,7 +5,7 @@ rpi-cluster
 -   [🧰 Hardware](#hardware)
 -   [🔬 Setting up the microSD card](#setting-up-the-microsd-card)
 -   [🥾 Setting up USB boot](#setting-up-usb-boot)
--   [👨‍🍳 Changing the hostname](#changing-the-hostname)
+-   [👩‍🍳 Changing the hostname](#changing-the-hostname)
 -   [👤 Change user](#change-user)
 -   [🔑 Set up `.pub` key
     authentication](#set-up-.pub-key-authentication)
@@ -148,7 +148,7 @@ Now, with the Pi shutdown and disconnected from power, insert the USB
 and remove the microSD. Turn on the Pi and it should boot from USB now.
 Repeat this process for all Pi’s.
 
-## 👨‍🍳 Changing the hostname
+## 👩‍🍳 Changing the hostname
 
 For all my Pi’s, I want clear hostnames to organize my cluster. I went
 with the following naming:
@@ -269,7 +269,7 @@ If you want this to be permanent, put it in your `~/.zshrc` file. After
 all of this, you should be able to fetch all nodes with
 `kubectl get nodes`.
 
-<img src="images/kubectl-get-nodes.png" width="1340" />
+<img src="images/readme-kubectl-get-nodes.png" width="1340" />
 
 Note, that I think the `--ask-become-pass` part is not supposed to be
 necessary. I may have configured things wrong, but adding it allows this
